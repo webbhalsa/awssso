@@ -46,6 +46,7 @@ func (m checkModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		switch msg.String() {
 		case "ctrl+c":
 			m.items = nil
+			m.indices = nil
 			return m, tea.Quit
 		case "enter":
 			return m, tea.Quit

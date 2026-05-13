@@ -36,7 +36,7 @@ awssso setup
 ```
 
 This will:
-1. Prompt for your SSO start URL and region
+1. Prompt for your SSO start URL (URL of the *AWS access portal*) and region
 2. Open a browser for authentication
 3. Discover all accounts and roles you have access to
 4. Show an interactive checklist — pick which combinations to add as profiles
