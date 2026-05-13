@@ -1,6 +1,6 @@
 package main
 
-import "github.com/jesperblomquist/awssso/cmd"
+import "github.com/webbhalsa/awssso/cmd"
 
 var version = "dev" // overridden by GoReleaser: -X main.version={{.Version}}
 

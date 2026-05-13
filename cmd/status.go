@@ -5,8 +5,8 @@ import (
 	"time"
 
 	"github.com/charmbracelet/lipgloss"
-	"github.com/jesperblomquist/awssso/internal/awsconfig"
-	"github.com/jesperblomquist/awssso/internal/sso"
+	"github.com/webbhalsa/awssso/internal/awsconfig"
+	"github.com/webbhalsa/awssso/internal/sso"
 	"github.com/spf13/cobra"
 )
 

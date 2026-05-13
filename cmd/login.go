@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/jesperblomquist/awssso/internal/awsconfig"
-	"github.com/jesperblomquist/awssso/internal/sso"
-	"github.com/jesperblomquist/awssso/internal/tui"
+	"github.com/webbhalsa/awssso/internal/awsconfig"
+	"github.com/webbhalsa/awssso/internal/sso"
+	"github.com/webbhalsa/awssso/internal/tui"
 	"github.com/spf13/cobra"
 )
 

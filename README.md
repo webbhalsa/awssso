@@ -95,7 +95,7 @@ All other output (progress messages, errors) goes to stderr and is shown in the 
    git tag v1.0.0
    git push origin main --tags
    ```
-3. The [Release workflow](https://github.com/jesperblomquist/awssso/actions/workflows/release.yml) will automatically build binaries for macOS and Linux and publish a GitHub Release. The Homebrew formula in [webbhalsa/homebrew-tap](https://github.com/webbhalsa/homebrew-tap) will be updated automatically.
+3. The [Release workflow](https://github.com/webbhalsa/awssso/actions/workflows/release.yml) will automatically build binaries for macOS and Linux and publish a GitHub Release. The Homebrew formula in [webbhalsa/homebrew-tap](https://github.com/webbhalsa/homebrew-tap) will be updated automatically.
 
 Tags must follow [semver](https://semver.org/) and start with `v` (e.g. `v1.0.0`).
 

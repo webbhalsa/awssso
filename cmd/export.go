@@ -5,8 +5,8 @@ import (
 	"os"
 	"sort"
 
-	"github.com/jesperblomquist/awssso/internal/awsconfig"
-	"github.com/jesperblomquist/awssso/internal/tui"
+	"github.com/webbhalsa/awssso/internal/awsconfig"
+	"github.com/webbhalsa/awssso/internal/tui"
 )
 
 func pickProfileAndExport(cfg *awsconfig.Config, sessionName string) error {

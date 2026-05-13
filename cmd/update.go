@@ -12,7 +12,7 @@ func fetchLatestVersion(current string) string {
 		return ""
 	}
 	client := &http.Client{Timeout: 5 * time.Second}
-	resp, err := client.Get("https://api.github.com/repos/jesperblomquist/awssso/releases/latest")
+	resp, err := client.Get("https://api.github.com/repos/webbhalsa/awssso/releases/latest")
 	if err != nil || resp.StatusCode != http.StatusOK {
 		return ""
 	}

@@ -1,4 +1,4 @@
-module github.com/jesperblomquist/awssso
+module github.com/webbhalsa/awssso
 
 go 1.25.5
 
