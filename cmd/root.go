@@ -33,7 +33,7 @@ func Execute(version string) {
 	}
 
 	wg.Wait()
-	if latestVersion != "" {
+	if latestVersion != "" && rootCmd.CalledAs() != "init" {
 		fmt.Fprintf(os.Stderr, "\nUpdate available: %s → %s  Run: brew upgrade awssso\n", version, latestVersion)
 	}
 }
