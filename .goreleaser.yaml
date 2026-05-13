@@ -45,37 +45,14 @@ brews:
     install: |
       bin.install "awssso"
     post_install: |
-      begin
-        shell = ENV["SHELL"] || ""
-        if shell.end_with?("fish")
-          rc = "#{Dir.home}/.config/fish/config.fish"
-          line = "awssso init | source"
-        elsif shell.end_with?("zsh")
-          rc = "#{Dir.home}/.zshrc"
-          line = 'eval "$(awssso init)"'
-        else
-          rc = "#{Dir.home}/.bashrc"
-          line = 'eval "$(awssso init)"'
-        end
-
-        rc = File.realpath(rc) if File.symlink?(rc)
-        unless File.exist?(rc) && File.read(rc).include?("awssso init")
-          FileUtils.mkdir_p(File.dirname(rc))
-          File.open(rc, "a") do |f|
-            f.puts "\n# awssso shell integration"
-            f.puts line
-          end
-          opoo "Added awssso shell integration to #{rc}"
-          opoo "Restart your shell or run: source #{rc}"
-        end
-      rescue => e
-        opoo "Could not add shell integration automatically: #{e}"
-        opoo "Add it manually — see caveats above."
-      end
+      system "#{bin}/awssso", "setup-shell"
     caveats: |
       Shell integration has been added to your shell rc file automatically.
-      If it wasn't (e.g. you use a non-standard shell), add this manually:
+      If it wasn't (e.g. you use a non-standard shell or there was an error),
+      you can add it by running:
+        awssso setup-shell
 
+      Or add it to your shell rc file by hand:
         # zsh / bash:
         eval "$(awssso init)"
 
