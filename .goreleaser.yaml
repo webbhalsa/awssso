@@ -45,26 +45,31 @@ brews:
     install: |
       bin.install "awssso"
     post_install: |
-      # Inject shell integration into the user's shell rc file if not already present.
-      shell = ENV["SHELL"] || ""
-      if shell.end_with?("fish")
-        rc = "#{Dir.home}/.config/fish/config.fish"
-        line = "awssso init | source"
-      elsif shell.end_with?("zsh")
-        rc = "#{Dir.home}/.zshrc"
-        line = 'eval "$(awssso init)"'
-      else
-        rc = "#{Dir.home}/.bashrc"
-        line = 'eval "$(awssso init)"'
-      end
-
-      unless File.exist?(rc) && File.read(rc).include?("awssso init")
-        File.open(rc, "a") do |f|
-          f.puts "\n# awssso shell integration"
-          f.puts line
+      begin
+        shell = ENV["SHELL"] || ""
+        if shell.end_with?("fish")
+          rc = "#{Dir.home}/.config/fish/config.fish"
+          line = "awssso init | source"
+        elsif shell.end_with?("zsh")
+          rc = "#{Dir.home}/.zshrc"
+          line = 'eval "$(awssso init)"'
+        else
+          rc = "#{Dir.home}/.bashrc"
+          line = 'eval "$(awssso init)"'
         end
-        opoo "Added awssso shell integration to #{rc}"
-        opoo "Restart your shell or run: source #{rc}"
+
+        unless File.exist?(rc) && File.read(rc).include?("awssso init")
+          FileUtils.mkdir_p(File.dirname(rc))
+          File.open(rc, "a") do |f|
+            f.puts "\n# awssso shell integration"
+            f.puts line
+          end
+          opoo "Added awssso shell integration to #{rc}"
+          opoo "Restart your shell or run: source #{rc}"
+        end
+      rescue => e
+        opoo "Could not add shell integration automatically: #{e}"
+        opoo "Add it manually — see caveats above."
       end
     caveats: |
       Shell integration has been added to your shell rc file automatically.
