@@ -58,6 +58,7 @@ brews:
           line = 'eval "$(awssso init)"'
         end
 
+        rc = File.realpath(rc) if File.symlink?(rc)
         unless File.exist?(rc) && File.read(rc).include?("awssso init")
           FileUtils.mkdir_p(File.dirname(rc))
           File.open(rc, "a") do |f|
