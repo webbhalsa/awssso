@@ -20,6 +20,7 @@ var (
 	okStyle      = lipgloss.NewStyle().Foreground(lipgloss.Color("10")).Bold(true)
 	expiredStyle = lipgloss.NewStyle().Foreground(lipgloss.Color("9")).Bold(true)
 	dimStyle     = lipgloss.NewStyle().Foreground(lipgloss.Color("8"))
+	activeStyle  = lipgloss.NewStyle().Foreground(lipgloss.Color("11")).Bold(true)
 )
 
 func runStatus(_ *cobra.Command, _ []string) error {
@@ -32,6 +33,8 @@ func runStatus(_ *cobra.Command, _ []string) error {
 		fmt.Println("No SSO sessions configured. Run `awssso setup` to get started.")
 		return nil
 	}
+
+	activeProfile := getEnv("AWS_PROFILE")
 
 	for _, session := range cfg.SSOSessions {
 		cached, valid := sso.LoadCachedToken(session.StartURL)
@@ -48,10 +51,17 @@ func runStatus(_ *cobra.Command, _ []string) error {
 			if p.SSOSession != session.Name {
 				continue
 			}
-			fmt.Printf("  %s  %s / %s\n",
+			name := p.Name
+			suffix := ""
+			if p.Name == activeProfile {
+				name = activeStyle.Render(p.Name)
+				suffix = activeStyle.Render(" ◀ active")
+			}
+			fmt.Printf("  %s  %s / %s%s\n",
 				dimStyle.Render("profile:"),
-				p.Name,
+				name,
 				dimStyle.Render(fmt.Sprintf("%s — %s", p.AccountID, p.RoleName)),
+				suffix,
 			)
 		}
 		fmt.Println()
